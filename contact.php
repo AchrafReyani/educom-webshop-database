@@ -1,9 +1,6 @@
 
 <?php 
 
-
-  
-
   function validateForm() { 
       //add empty values to variables
   $pronouns = $name = $email = $phonenumber = $street = $housenumber = $postalcode =
@@ -68,7 +65,7 @@
         } 
       
       }else if ($communication == "postal") {
-        echo 'postal was communication';
+
         if (empty($_POST["street"])) {
           $streetError = "Street is required";
         } 

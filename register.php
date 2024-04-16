@@ -33,31 +33,51 @@
         $confirm_password = $_POST['confirm_password'];
       }
 
-    }
+            //check if passwords match
+            if ($password != $confirm_password) {
+              $passwordError = "Passwords do not match";
+              $confirm_passwordError = "Passwords do not match";
+            }
 
-      //check if email already exists
-      $usersFile = 'users/users.txt';
-      $users = file($usersFile, FILE_IGNORE_NEW_LINES);
-      foreach ($users as $user) {
-        $userInfo = explode('|', $user);
-        if ($email == $userInfo[0]) {
-          $emailError = "Email already exists";
-          break;
-        }
-      }
+               //check if email already exists
+      
+               
 
-      //check if passwords match
-      if ($password != $confirm_password) {
-        $passwordError = "Passwords do not match";
-        $confirm_passwordError = "Passwords do not match";
-      }
 
-      //write user info to the usersfile
+       //check if  there are no errors     
       if ($emailError == "" && $nameError == "" && $passwordError == "" && $confirm_passwordError == "") {
         $valid = true;
-        $user = $email . '|' . $name . '|' . $password .  PHP_EOL;
-        file_put_contents($usersFile, $user, FILE_APPEND);
-      }
+         //write accountinfo to the users table
+        //TODO SQL CODE
+        try {
+        require_once 'connection.php';
+
+        $query = "INSERT INTO users (email, username, pwd) VALUES (:email, :username, :pwd);";
+        
+        $stmt = $pdo->prepare($query);
+
+        $stmt ->bindParam(':email', $email);
+        $stmt ->bindParam(':username', $name);
+        $stmt ->bindParam(':pwd', $password);
+
+        $stmt ->execute();
+
+        $pdo = null;
+        $stmt = null;
+
+        
+        die();
+      
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+
+    }
+
+  }
+
+
+   
 
      
      return [ 'valid' => $valid,  'name' => $name, 'email' => $email, 'password' => $password, 'confirm_password' => $confirm_password, 'passwordError' => $passwordError, 'confirm_passwordError' => $confirm_passwordError, 'nameError' => $nameError, 'emailError' => $emailError ];
