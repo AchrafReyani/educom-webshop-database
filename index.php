@@ -7,7 +7,7 @@ include 'menu.php';
 include 'footer.php';
 include 'beginDocument.php';
 include 'endDocument.php';
-//include 'connection.php';
+//include 'db.php';
 
 session_start(); //start session
 

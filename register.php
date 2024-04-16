@@ -48,29 +48,23 @@
       if ($emailError == "" && $nameError == "" && $passwordError == "" && $confirm_passwordError == "") {
         $valid = true;
          //write accountinfo to the users table
-        //TODO SQL CODE
-        try {
-        require_once 'connection.php';
+        //SQL INSERT
+        require_once 'db.php';
 
-        $query = "INSERT INTO users (email, username, pwd) VALUES (:email, :username, :pwd);";
-        
-        $stmt = $pdo->prepare($query);
+$sql = "INSERT INTO users (email, username, pwd) VALUES (\"$email\", \"$name\", \"$password\")";
 
-        $stmt ->bindParam(':email', $email);
-        $stmt ->bindParam(':username', $name);
-        $stmt ->bindParam(':pwd', $password);
+if (mysqli_query($conn, $sql)) {
+  echo "New record created successfully";
+} else {
+  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
 
-        $stmt ->execute();
+mysqli_close($conn);
 
-        $pdo = null;
-        $stmt = null;
+die();
 
-        
-        die();
       
-    } catch (PDOException $e) {
-      die($e->getMessage());
-    }
+    
 
     }
 
