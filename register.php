@@ -1,6 +1,4 @@
 <?php 
-
-
   function validateRegistration() {
 
         $email = $name = $password = $confirm_password = "";
@@ -9,10 +7,26 @@
 
         if ($_SERVER ['REQUEST_METHOD'] === 'POST') {
       //save input if valid and send error message when not valid
+     
+     //if email is empty give required error, if it exists check for duplicate emails in the database. 
       if (empty($_POST["email"])) {
         $emailError = "Email is required";
       } else {
         $email = $_POST['email'];
+        //Remove spaces from the content 
+        //$email = trim($email); 
+        require_once 'db.php';
+        $query = mysqli_query($conn, "SELECT email from users where email = '$email'"); //Search for the email from the users database 
+        $count = mysqli_num_rows($query); //get the number of rows that contain the email address. 
+        echo $count;
+        echo $email;
+        if ($count > 0) { 
+        //echo "Email already exists"; 
+        //Action to take if email exists 
+        $emailError = "Email already exists";
+        } 
+        //Email does not exist in the DB 
+        //$email = $_POST['email'];
       }
 
       if (empty($_POST["name"])) {
@@ -40,7 +54,9 @@
             }
 
                //check if email already exists
-      
+              //TODO ook bij de if hieronder
+              
+              
                
 
 
@@ -54,26 +70,18 @@
 $sql = "INSERT INTO users (email, username, pwd) VALUES (\"$email\", \"$name\", \"$password\")";
 
 if (mysqli_query($conn, $sql)) {
-  echo "New record created successfully";
+  //echo "New record created successfully";
 } else {
-  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+  //echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 
 mysqli_close($conn);
 
-die();
-
-      
-    
+//die();
+ 
 
     }
-
-  }
-
-
-   
-
-     
+  } 
      return [ 'valid' => $valid,  'name' => $name, 'email' => $email, 'password' => $password, 'confirm_password' => $confirm_password, 'passwordError' => $passwordError, 'confirm_passwordError' => $confirm_passwordError, 'nameError' => $nameError, 'emailError' => $emailError ];
 }
   
@@ -104,9 +112,6 @@ die();
     </form>";
   }
 
-
-
-
     function showRegisterPage($data){
 
         showRegisterStart();
@@ -115,7 +120,5 @@ die();
         showRegisterField('password', 'Password', $data);
         showRegisterField('confirm_password', 'Confirm Password', $data);
         showRegisterEnd();
-    
     }
-
 ?>

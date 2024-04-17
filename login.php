@@ -2,8 +2,6 @@
 
 
 function validateLogin() {
-    $usersFile = 'users/users.txt';
-    $valid = false;
     $email = $password = $username= "";   
     $loginError = $emailError = $passwordError = "";
 
@@ -21,19 +19,19 @@ function validateLogin() {
     }
 
     //logic to check file for valid userinfo
-    $users = file($usersFile, FILE_IGNORE_NEW_LINES);
-    foreach ($users as $user) {
-      $userInfo = explode('|', $user);
-      if ($email == $userInfo[0] && $password == $userInfo[2]) {
-        $username = $userInfo[1];
-        $valid = true;
-        break;
-      }
-    }
+    require_once 'db.php';
 
-    if (!$valid) {
-      $loginError = "Incorrect email or password";
+    $sql = "INSERT INTO users (email, username, pwd) VALUES (\"$email\", \"$name\", \"$password\")";
+    
+    if (mysqli_query($conn, $sql)) {
+      //echo "New record created successfully";
+    } else {
+      //echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
+    
+    mysqli_close($conn);
+    
+    //die();
   }
 
     //$valid = true when email and password combination is found in file
