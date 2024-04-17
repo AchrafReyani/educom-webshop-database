@@ -4,6 +4,7 @@
 function validateLogin() {
     $email = $password = $username= "";   
     $loginError = $emailError = $passwordError = "";
+    $valid = false;
 
     if ($_SERVER ['REQUEST_METHOD'] === 'POST') {
     if (empty($_POST["email"])) {
@@ -21,12 +22,12 @@ function validateLogin() {
     //logic to check file for valid userinfo
     require_once 'db.php';
 
-    $sql = "INSERT INTO users (email, username, pwd) VALUES (\"$email\", \"$name\", \"$password\")";
+    $sql = "SELECT * FROM users WHERE email = '$email' AND pwd = '$password'";
     
     if (mysqli_query($conn, $sql)) {
-      //echo "New record created successfully";
+      //echo "log in was succesfull";
     } else {
-      //echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+      //echo "login failed";
     }
     
     mysqli_close($conn);
