@@ -11,6 +11,10 @@ body {
     height: 48px;
     text-align: center;
   }
+
+  span {
+    color: red;
+  }
   
   ul.menu {
     list-style: none;

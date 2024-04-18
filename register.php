@@ -16,6 +16,7 @@
         //Remove spaces from the content 
         //$email = trim($email); 
         require_once 'db.php';
+        $conn = connectToDB();
         $query = mysqli_query($conn, "SELECT email from users where email = '$email'"); //Search for the email from the users database 
         $count = mysqli_num_rows($query); //get the number of rows that contain the email address. 
         echo $count;

@@ -21,7 +21,7 @@ function validateLogin() {
 
     //logic to check file for valid userinfo
     require_once 'db.php';
-
+    $conn = connectToDB();
     $query = mysqli_query($conn, "SELECT * FROM users WHERE email = '$email' AND pwd = '$password'");
     //echo [$query];
     if (mysqli_num_rows($query) === 1) {
@@ -33,6 +33,7 @@ function validateLogin() {
       
     } else {
       //echo "login failed";
+      $loginError = "Invalid email or password";
     }
     
     mysqli_close($conn);
