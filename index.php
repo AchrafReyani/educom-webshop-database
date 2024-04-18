@@ -36,6 +36,9 @@ function showContent($data){
 		case 'Login';
 		  showLoginPage($data);
 		  break;
+    case 'ChangePassword';
+      showChangePasswordPage($data);
+      break;
 		default; 
 		  showHomePage();
 	}
@@ -100,9 +103,14 @@ function processRequest($page) {
       doLogoutUser();
       $page = 'Home';
       break;
-
+    case 'ChangePassword';
+      include 'changePassword.php';
+      $data = validateChangePassword();
+      if ($data['valid']) {
+        $page = 'Home';
+      }
+      break;
       default;
-
       break;
     }
     $data['page'] = $page; //add value of current page to the data
