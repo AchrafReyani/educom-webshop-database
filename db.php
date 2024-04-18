@@ -4,7 +4,9 @@ $dbusername = "WebShopUser";
 $dbpassword = "mBAgRiGMZe7wPq5WAjb6";
 $dbName = "achraf_webshop";
 
+//functies maken van verbinden en van queries
 
+function connectToDB() {
 try {
     // create connection
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbName);
@@ -16,5 +18,6 @@ try {
 } catch (Exception $e) {
     // Handle the exception gracefully
     die("Error: " . $e->getMessage());
+}
 }
 ?>

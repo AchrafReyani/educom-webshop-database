@@ -23,9 +23,9 @@ function validateLogin() {
     require_once 'db.php';
 
     $query = mysqli_query($conn, "SELECT * FROM users WHERE email = '$email' AND pwd = '$password'");
-    echo [$query];
+    //echo [$query];
     if (mysqli_num_rows($query) === 1) {
-      echo "log in was succesfull";
+      //echo "log in was succesfull";
       $row = mysqli_fetch_assoc($query);
       $username = $row['username'];
       
