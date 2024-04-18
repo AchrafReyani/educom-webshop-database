@@ -68,7 +68,8 @@
         //SQL INSERT
         require_once 'db.php';
         $conn = connectToDB();
-        registerNewUser($conn, $email, $name, $password);
+        $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        registerNewUser($conn, $email, $name, $hashedPassword);
         mysqli_close($conn);
  
 

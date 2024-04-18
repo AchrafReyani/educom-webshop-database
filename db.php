@@ -19,9 +19,9 @@ try {
 }
 }
 
-function getUserInfo($conn, $email, $password)
+function getUserInfo($conn, $email)
 {
-    $query = mysqli_query($conn, "SELECT * FROM users WHERE email = '$email' AND pwd = '$password'");
+    $query = mysqli_query($conn, "SELECT * FROM users WHERE email = '$email'");
     return $query;
 }
 
