@@ -1,6 +1,7 @@
 <?php
-function doLoginUser($username) {
+function doLoginUser($username, $email) {
     $_SESSION['username'] = $username;
+    $_SESSION['email'] = $email;
 }
 
 function doLogoutUser() {

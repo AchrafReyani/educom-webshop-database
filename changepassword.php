@@ -37,15 +37,30 @@ function validateChangePassword(){
             $newPasswordError = "New password cannot be the same as current password";
           }
 
+        //only change the password when there are no errors and the current password is correct
+        if (!$currentPasswordError && !$newPasswordError && !$confirmNewPasswordError) {
+            //connect to database
         //make db connection
-        //get current user's password
-        //check if password is correct
-        //hash new password
-        //insert new password into database
-        //
-        
-    
+        require_once 'db.php';
+        $conn = connectToDB();
 
+        //get current user's password
+        $query = getCurrentPassword($conn, $_SESSION['email']);
+        $row = mysqli_fetch_assoc($query);
+        //get the hashed password from the database
+        $hashed_password = $row['pwd'];
+
+        if (mysqli_num_rows($query) === 1 && password_verify($currentPassword, $hashed_password)) {
+            // echo "password is correct";
+            //hash new password
+            $hashedPassword = password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
+            //insert new password into database
+            updatePassword($conn, $_SESSION['email'], $hashedPassword);
+            
+            $valid = true;
+            
+          }
+        }
     }
 
     return [ 'valid' => $valid, 'currentPassword' => $currentPassword, 'newPassword' => $newPassword, 'confirmNewPassword' => $confirmNewPassword,  'currentPasswordError' => $currentPasswordError, 'newPasswordError' => $newPasswordError, 'confirmNewPasswordError' => $confirmNewPasswordError];

@@ -31,4 +31,17 @@ function registerNewUser($conn, $email , $name, $password)
     mysqli_query($conn, $query);
 }
 
+function getCurrentPassword($conn, $email)
+{
+    $query = mysqli_query($conn, "SELECT pwd FROM users WHERE email = '$email'");
+    return $query;
+}
+
+function updatePassword($conn, $email, $password)
+{
+    $query = "UPDATE users SET pwd = '$password' WHERE email = '$email'";
+    mysqli_query($conn, $query);
+}
+
+
 ?>

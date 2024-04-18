@@ -94,7 +94,7 @@ function processRequest($page) {
       include 'login.php';
       $data = validateLogin();
       if ($data['valid']) {
-        doLoginUser($data['username']);
+        doLoginUser($data['username'], $data['email']);
         $page = 'Home';
         //set state to logged in
       }
