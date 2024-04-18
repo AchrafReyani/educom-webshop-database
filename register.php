@@ -67,18 +67,9 @@
          //write accountinfo to the users table
         //SQL INSERT
         require_once 'db.php';
-
-$sql = "INSERT INTO users (email, username, pwd) VALUES (\"$email\", \"$name\", \"$password\")";
-
-if (mysqli_query($conn, $sql)) {
-  //echo "New record created successfully";
-} else {
-  //echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
-
-mysqli_close($conn);
-
-//die();
+        $conn = connectToDB();
+        registerNewUser($conn, $email, $name, $password);
+        mysqli_close($conn);
  
 
     }

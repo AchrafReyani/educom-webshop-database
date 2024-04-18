@@ -25,5 +25,10 @@ function getUserInfo($conn, $email, $password)
     return $query;
 }
 
+function registerNewUser($conn, $email , $name, $password)
+{
+    $query = "INSERT INTO users (email, username, pwd) VALUES (\"$email\", \"$name\", \"$password\")";
+    mysqli_query($conn, $query);
+}
 
 ?>
