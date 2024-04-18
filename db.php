@@ -43,5 +43,14 @@ function updatePassword($conn, $email, $password)
     mysqli_query($conn, $query);
 }
 
+function getAllProducts($conn)
+{
+    $sql = "SELECT id, name, description, price, image FROM products";
+    $query = mysqli_query($conn, $sql);
+    
+    return $query;
+}
+
+
 
 ?>

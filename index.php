@@ -39,6 +39,10 @@ function showContent($data){
     case 'ChangePassword';
       showChangePasswordPage($data);
       break;
+    case 'Webshop';
+      include 'webshop.php';
+      showWebshopPage();
+      break;
 		default; 
 		  showHomePage();
 	}
