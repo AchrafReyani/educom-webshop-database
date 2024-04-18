@@ -1,8 +1,4 @@
 <?php
-
-
-//functies maken van verbinden en van queries
-
 function connectToDB() {
 try {
     $servername ="localhost";
@@ -22,4 +18,12 @@ try {
     die("Error: " . $e->getMessage());
 }
 }
+
+function getUserInfo($conn, $email, $password)
+{
+    $query = mysqli_query($conn, "SELECT * FROM users WHERE email = '$email' AND pwd = '$password'");
+    return $query;
+}
+
+
 ?>

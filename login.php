@@ -22,7 +22,7 @@ function validateLogin() {
     //logic to check file for valid userinfo
     require_once 'db.php';
     $conn = connectToDB();
-    $query = mysqli_query($conn, "SELECT * FROM users WHERE email = '$email' AND pwd = '$password'");
+    $query = getUserInfo($conn, $email,  $password);
     //echo [$query];
     if (mysqli_num_rows($query) === 1) {
       //echo "log in was succesfull";
