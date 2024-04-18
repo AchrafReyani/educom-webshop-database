@@ -33,7 +33,9 @@ function validateLogin() {
       
     } else {
       //echo "login failed";
+      if (!empty($_POST["password"]) && !empty($_POST["email"])) {
       $loginError = "Invalid email or password";
+    }
     }
     
     mysqli_close($conn);
