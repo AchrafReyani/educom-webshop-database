@@ -59,6 +59,8 @@ function validateChangePassword(){
             
             $valid = true;
             
+          } else {
+            $currentPasswordError = "Current password is incorrect";
           }
         }
     }
