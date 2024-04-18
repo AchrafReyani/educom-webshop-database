@@ -6,6 +6,7 @@ function doLoginUser($username, $email) {
 
 function doLogoutUser() {
     unset($_SESSION['username']);
+    unset($_SESSION['email']);
 }
 
 function getUsername() {
