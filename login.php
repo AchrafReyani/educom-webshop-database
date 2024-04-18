@@ -24,9 +24,10 @@ function validateLogin() {
     $conn = connectToDB();
     $query = getUserInfo($conn, $email);
     $row = mysqli_fetch_assoc($query);
+    //get the hashed password from the database
     $hashed_password = $row['pwd'];
-    echo $hashed_password;
-    echo $password;
+    //echo $hashed_password;
+    //echo $password;
     //echo [$query];
     //if account is found and password matches hashed password
     if (mysqli_num_rows($query) === 1 && password_verify($password, $hashed_password)) {
