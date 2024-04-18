@@ -49,7 +49,7 @@
       }
 
             //check if passwords match
-            if ($password != $confirm_password) {
+            if ($password != $confirm_password && ($password != "" && $confirm_password != "")) {
               $passwordError = "Passwords do not match";
               $confirm_passwordError = "Passwords do not match";
             }

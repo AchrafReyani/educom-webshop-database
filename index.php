@@ -107,6 +107,8 @@ function processRequest($page) {
       include 'changePassword.php';
       $data = validateChangePassword();
       if ($data['valid']) {
+        //logout the user and send them back to the home page
+        doLogoutUser();
         $page = 'Home';
       }
       break;
