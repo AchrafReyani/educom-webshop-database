@@ -8,6 +8,8 @@ function showWebshopContent() {
     require_once 'db.php';
     $conn = connectToDB();
     $result = getAllProducts($conn);
+
+    echo "<div class = 'products'>";
     while($row = mysqli_fetch_assoc($result)) {
         $id = $row["id"];
         $name = $row["name"];
@@ -25,6 +27,7 @@ function showWebshopContent() {
         //echo "<a href='product_details.php?id=$id'>View Details</a>";
         echo "</div>";
       }
+      echo "</div>";
 
 
 }
