@@ -1,11 +1,9 @@
 <?php
-
-function validateChangePassword(){
+function validateChangePassword() {
     $currentPassword = $newPassword = $confirmNewPassword = "";
     $currentPasswordError = $newPasswordError = $confirmNewPasswordError = "";
     $valid = false;
 
-    
     if ($_SERVER ['REQUEST_METHOD'] === 'POST') {
         //print error messages for empty fields
         if (empty($_POST["currentPassword"])) {
@@ -94,7 +92,7 @@ function showChangePasswordStart() {
   
    }
 
-    function showChangePasswordPage($data){
+    function showChangePasswordPage($data) {
 
       showChangePasswordStart();
       showChangePasswordField("currentPassword", "Current password", $data);

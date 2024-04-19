@@ -1,5 +1,4 @@
 <?php
-
 //mandatory includes for all pages
 include "sessionManager.php";
 include 'header.php';
@@ -12,8 +11,10 @@ include 'endDocument.php';
 session_start(); //start session
 
 //functions
-function showContent($data){
-	switch($data['page'])
+function showContent($data) {
+
+  $page = explode('&', $data['page'])[0]; // Get first part before '&'
+	switch($page)
 	{
 		case 'Home';
       include 'home.php';
@@ -42,6 +43,11 @@ function showContent($data){
     case 'Webshop';
       include 'webshop.php';
       showWebshopPage();
+      break;
+    case 'Product';
+      include 'product.php';
+      echo "product page";
+      showProductPage($data);
       break;
 		default; 
 		  showHomePage();
@@ -122,7 +128,8 @@ function processRequest($page) {
     $data['page'] = $page; //add value of current page to the data
     return $data;
 }
-function showResponsePage($data){
+
+function showResponsePage($data) {
 	beginDocument();
 	showHeader();
 	showMenu();
@@ -136,5 +143,4 @@ $page = getRequestedPage();
 $data = processRequest($page);
 var_dump($data);//for testing
 showResponsePage($data);
-
 ?>

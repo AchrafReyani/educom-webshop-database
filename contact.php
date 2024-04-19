@@ -1,11 +1,9 @@
 
 <?php 
-
   function validateForm() { 
       //add empty values to variables
   $pronouns = $name = $email = $phonenumber = $street = $housenumber = $postalcode =
   $city = $communication = $message = "";
-  
 
   //initiate error message variables
   $pronounsError = $nameError = $emailError = $phonenumberError = $streetError = $housenumberError = $postalcodeError = $cityError = $communicationError = $messageError = "";
@@ -179,36 +177,28 @@
     echo "</div>";
   }
   }
-  
-
-
 
   function showFormEnd() {
     echo "<div>
     <input type=\"submit\" value=\"Send\">
     </div>
   </form>";
-
   }
 
-
-  function showContactPage($data){
-    
-    showFormStart();
-    showFormField("pronouns", "Pronouns", $data, 'PRONOUN');
-    showFormField("name", "Name", $data, NULL); 
-    showFormField("email", "Email", $data, NULL); 
-    showFormField("phonenumber", "Phone number", $data, NULL);
-    showFormField("street", "Street", $data, NULL); 
-    showFormField("housenumber", "House number", $data, NULL);
-    showFormField("postalcode", "Postal code", $data, NULL);
-    showFormField("city", "City", $data, NULL); 
-    showFormField("communication", "Communication method", $data, 'COMMUNICATION');
-    showFormField("message", "Message", $data, NULL); 
-    showFormEnd();
-  
-  }
-
-  ?>
+function showContactPage($data){ 
+  showFormStart();
+  showFormField("pronouns", "Pronouns", $data, 'PRONOUN');
+  showFormField("name", "Name", $data, NULL); 
+  showFormField("email", "Email", $data, NULL); 
+  showFormField("phonenumber", "Phone number", $data, NULL);
+  showFormField("street", "Street", $data, NULL); 
+  showFormField("housenumber", "House number", $data, NULL);
+  showFormField("postalcode", "Postal code", $data, NULL);
+  showFormField("city", "City", $data, NULL); 
+  showFormField("communication", "Communication method", $data, 'COMMUNICATION');
+  showFormField("message", "Message", $data, NULL); 
+  showFormEnd();
+}
+?>
 
  

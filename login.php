@@ -1,6 +1,4 @@
 <?php 
-
-
 function validateLogin() {
     $email = $password = $username= "";   
     $loginError = $emailError = $passwordError = "";
@@ -40,55 +38,43 @@ function validateLogin() {
       //echo "login failed";
       if (!empty($_POST["password"]) && !empty($_POST["email"])) {
       $loginError = "Invalid email or password";
+      }
     }
-    }
-  
-    
     mysqli_close($conn);
-    
-    //die();
-  }
-
+    }
     //$valid = true when email and password combination is found in file
-
     return [ 'valid' => $valid, 'email' => $email, 'password' => $password,  'loginError' => $loginError,  
               'emailError' => $emailError, 'passwordError' => $passwordError, 'username' => $username];
+}
 
-  }
-
-  function showLoginStart() {
-    echo "<h2>Login</h2>
-    <p>Please enter your email and password to Login.</p>
-    <form action=\"index.php\" method=\"post\">
-    <input name=\"page\" value=\"Login\" type=\"hidden\">";
-  }
+function showLoginStart() {
+  echo "<h2>Login</h2>
+  <p>Please enter your email and password to Login.</p>
+  <form action=\"index.php\" method=\"post\">
+  <input name=\"page\" value=\"Login\" type=\"hidden\">";
+}
   
-  function showLoginEnd($errorMessage, $data) {
-     echo "<div>
-     <span>* " . $data[$errorMessage]  . "</span>
-     <input type=\"submit\" value=\"Send\">
-     </div>
-   </form>";
-  }
+function showLoginEnd($errorMessage, $data) {
+  echo "<div>
+  <span>* " . $data[$errorMessage]  . "</span>
+  <input type=\"submit\" value=\"Send\">
+  </div>
+  </form>";
+}
   
-  function showLoginField($fieldName, $label, $data) {
-  
-     echo "
-     <div>
-     <label for=\"$fieldName\">$label:</label>
-     <input type=\"text\" name=\"$fieldName\" value=\"". $data[$fieldName]."\">
-     <span>* " . $data[$fieldName . "Error"]  . "</span>
-     </div>";
-  
-   }
+function showLoginField($fieldName, $label, $data) {
+  echo "
+  <div>
+  <label for=\"$fieldName\">$label:</label>
+  <input type=\"text\" name=\"$fieldName\" value=\"". $data[$fieldName]."\">
+  <span>* " . $data[$fieldName . "Error"]  . "</span>
+  </div>";
+}
 
-    function showLoginPage($data){
-
-      showLoginStart();
-      showLoginField("email", "Email", $data);
-      showLoginField("password", "Password", $data);
-      showLoginEnd('loginError', $data);
-        
-    }
-
+function showLoginPage($data){
+  showLoginStart();
+  showLoginField("email", "Email", $data);
+  showLoginField("password", "Password", $data);
+  showLoginEnd('loginError', $data);
+}
 ?>

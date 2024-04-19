@@ -1,7 +1,7 @@
 <?php
 function doLoginUser($username, $email) {
     $_SESSION['username'] = $username;
-    $_SESSION['email'] = $email;
+    $_SESSION['email'] = $email;//currently used for changing the user's password
 }
 
 function doLogoutUser() {

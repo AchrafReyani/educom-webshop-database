@@ -1,5 +1,4 @@
 <?php
-
 function showWebshopStart() {
     echo "<h2>Webshop</h2>";
 }
@@ -13,30 +12,26 @@ function showWebshopContent() {
     while($row = mysqli_fetch_assoc($result)) {
         $id = $row["id"];
         $name = $row["name"];
-        $description = $row["description"];
+        //$description = $row["description"];
         $price = $row["price"];
         $image = $row["image"];
     
-        // Display product information (adjust HTML structure as needed)
-        echo "<div class='product'>";
+        // Display product information
+        echo "<a href='index.php?page=Product&id=$id' div class='product'>";
+        echo "<div class=''>";
         echo "<p>Product ID: $id</p>";
         echo "<img src='$image' alt='$name'>";
         echo "<h3>$name</h3>";
         //echo "<p>$description</p>";
         echo "<p class='price'>$$price</p>";
-        //echo "<a href='product_details.php?id=$id'>View Details</a>";
         echo "</div>";
+        echo "</a>";
       }
       echo "</div>";
-
-
 }
-
 
 function showWebshopPage() {
     showWebshopStart();
     showWebshopContent();
-
 }
-
 ?>
