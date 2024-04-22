@@ -9,6 +9,7 @@ function showMenu() {
   if (isUserLoggedIn()) {
     echo '  <li><a href=\'index.php?page=Logout\'>Logout ' . getUsername() .'</a></li>';
     echo '  <li><a href=\'index.php?page=ChangePassword\'>Change Password</a></li>';
+    echo '  <li><a href=\'index.php?page=ShoppingCart\'>Cart</a></li>';
   } else {
     echo '  <li><a href=\'index.php?page=Login\'>Login</a></li>
   <li><a href=\'index.php?page=Register\'>Register</a></li>';

@@ -46,9 +46,13 @@ function showContent($data) {
       break;
     case 'Product';
       include 'product.php';
-      echo "product page";
       showProductPage($data);
       break;
+    case 'ShoppingCart';
+      include 'shoppingCart.php';
+      showShoppingCartPage($data);
+      break;
+
 		default; 
 		  showHomePage();
 	}

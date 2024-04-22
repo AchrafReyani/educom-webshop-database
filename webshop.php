@@ -26,6 +26,10 @@ function showWebshopContent() {
         echo "<p class='price'>$$price</p>";
         echo "</div>";
         echo "</a>";
+        if(isUserLoggedIn()) {
+            include_once 'shoppingCart.php';
+            addToCartButton($id);
+        }
       }
       echo "</div>";
 }

@@ -1,6 +1,6 @@
 <?php
 function showProductStart() {
-    echo "<h2>Product details</h2>";
+  echo "<h2>Product details</h2>";
 }
 
 function showProductContent() {
@@ -35,7 +35,7 @@ function showProductContent() {
 }
 
 function showProductPage() {
-    showProductStart();
-    showProductContent();
+  showProductStart();
+  showProductContent();
 }
 ?>

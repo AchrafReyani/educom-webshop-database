@@ -3,7 +3,7 @@ function connectToDB() {
 try {
     $servername ="localhost";
     $dbusername = "WebShopUser";
-        $dbpassword = "mBAgRiGMZe7wPq5WAjb6";
+    $dbpassword = "mBAgRiGMZe7wPq5WAjb6";
     $dbName = "achraf_webshop";
     // create connection
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbName);
@@ -19,27 +19,54 @@ try {
     }
 }
 
+//where is this function called?
 function getUserInfo($conn, $email) {
-    $query = mysqli_query($conn, "SELECT * FROM users WHERE email = '$email'");
+    $emailEscape = mysqli_real_escape_string($conn, $email);
+
+    $query = mysqli_query($conn, "SELECT * FROM users WHERE email = '$emailEscape'");
     return $query;
 }
+  
 
-function registerNewUser($conn, $email , $name, $password) {
-    $query = "INSERT INTO users (email, username, pwd) VALUES (\"$email\", \"$name\", \"$password\")";
-    mysqli_query($conn, $query);
-}
+function registerNewUser($conn, $email, $name, $password) {
+    //use a prepared statement to safely insert user data
+    $stmt = mysqli_prepare($conn, "INSERT INTO users (email, username, pwd) VALUES (?, ?, ?)");
+    if (!$stmt) {
+      die("Error preparing statement: " . mysqli_error($conn));
+    }
+  
+    // Bind values using parameter types
+    mysqli_stmt_bind_param($stmt, "sss", $email, $name, $password);
+  
+    // Execute the prepared statement
+    if (mysqli_stmt_execute($stmt)) {
+      echo "User registration successful!";
+    } else {
+      echo "Error registering user: " . mysqli_stmt_error($stmt);
+    }
+  
+    // Close the statement
+    mysqli_stmt_close($stmt);
+  }
+
 
 function getCurrentPassword($conn, $email) {
-    $query = mysqli_query($conn, "SELECT pwd FROM users WHERE email = '$email'");
+    $emailEscape = mysqli_real_escape_string($conn, $email);
+    $query = mysqli_query($conn, "SELECT pwd FROM users WHERE email = '$emailEscape'");
     return $query;
 }
 
 function updatePassword($conn, $email, $password) {
-    $query = "UPDATE users SET pwd = '$password' WHERE email = '$email'";
+    $emailEscape = mysqli_real_escape_string($conn, $email);
+    $passwordEscape = mysqli_real_escape_string($conn, $password);
+    
+    $query = "UPDATE users SET pwd = '$passwordEscape' WHERE email = '$emailEscape'";
     mysqli_query($conn, $query);
 }
 
 function getAllProducts($conn) {
+    
+    
     $sql = "SELECT id, name, description, price, image FROM products";
     $query = mysqli_query($conn, $sql);
     
@@ -47,7 +74,9 @@ function getAllProducts($conn) {
 }
 
 function getProductDetails($conn, $id) {
-    $sql = "SELECT * FROM products WHERE id = $id";
+    $idEscape = mysqli_real_escape_string($conn, $id);
+    
+    $sql = "SELECT * FROM products WHERE id = $idEscape";
     $query = mysqli_query($conn, $sql);
     
     return $query;
