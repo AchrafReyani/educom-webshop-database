@@ -60,22 +60,24 @@
               
                
 
-
+              try {      
+                //SQL INSERT
+        require_once 'db.php';
+        $conn = connectToDB();
        //check if  there are no errors     
       if ($emailError == "" && $nameError == "" && $passwordError == "" && $confirm_passwordError == "") {
         $valid = true;
          //write accountinfo to the users table
-        //SQL INSERT
-        require_once 'db.php';
-        $conn = connectToDB();
+        
         $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
         registerNewUser($conn, $email, $name, $hashedPassword);
         mysqli_close($conn);
- 
-
+        }
+      } catch (Exception $e) {
+          $generalError = "Could not connect to the database, You cannot register at this time. Please try again later.";
+      }
     }
-  } 
-     return [ 'valid' => $valid,  'name' => $name, 'email' => $email, 'password' => $password, 'confirm_password' => $confirm_password, 'passwordError' => $passwordError, 'confirm_passwordError' => $confirm_passwordError, 'nameError' => $nameError, 'emailError' => $emailError ];
+     return [ 'valid' => $valid,  'name' => $name, 'email' => $email, 'password' => $password, 'confirm_password' => $confirm_password, 'passwordError' => $passwordError, 'confirm_passwordError' => $confirm_passwordError, 'nameError' => $nameError, 'emailError' => $emailError, 'generalError' => $generalError];
 }
   
 function showRegisterStart() {

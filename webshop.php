@@ -4,6 +4,7 @@ function showWebshopStart() {
 }
 
 function showWebshopContent() {
+    try {
     require_once 'db.php';
     $result = getAllProducts();
 
@@ -31,7 +32,11 @@ function showWebshopContent() {
         }
       }
       echo "</div>";
-      
+    } catch (Exception $e) {
+        $generalError = "Could not connect to the database, You cannot view the webshop at this time. Please try again later.";
+    }
+    return [ 'generalError' => $generalError ];
+
 }
 
 function showWebshopPage() {

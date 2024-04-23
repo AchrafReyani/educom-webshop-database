@@ -1,7 +1,7 @@
 <?php
 function connectToDB() {
     $servername ="localhost";
-    $dbusername = "WebShopUser";
+    $dbusername = "ebShopUser";
     $dbpassword = "mBAgRiGMZe7wPq5WAjb6";
     $dbName = "achraf_webshop";
     // create connection

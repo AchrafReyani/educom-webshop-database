@@ -41,7 +41,7 @@ function showContent($data) {
       showChangePasswordPage($data);
       break;
     case 'Webshop';
-      include 'webshop.php';
+      //include 'webshop.php';
       showWebshopPage();
       break;
     case 'Product';
@@ -86,6 +86,10 @@ function getRequestedPage() {
 function processRequest($page) {
   switch($page)
 	{
+    case 'Webshop';
+      include 'webshop.php';
+      $data = showWebshopContent();//get potential error message
+      break;
 		case 'Contact';
       include 'contact.php';
       $data = validateForm(); // Call the validation function from contact.php (assuming it's included)

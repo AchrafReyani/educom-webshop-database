@@ -19,6 +19,7 @@ function validateLogin() {
 
     //logic to check file for valid userinfo
     require_once 'db.php';
+    try {
     $user = getUserInfo($email);
     //store the hashed password from the database
     $hashed_password = $user['pwd'];
@@ -35,10 +36,14 @@ function validateLogin() {
       $loginError = "Invalid email or password";
       }
     }
+    } catch (Exception $e) {
+      $generalError = "Could not connect to the database, You cannot login at this time. Please try again later.";
+      //logError("Authentication failed for user ' . $email . ', SQLError: ' . $e->getMessage()'");
     }
+  }
     //$valid = true when email and password combination is found in file
     return [ 'valid' => $valid, 'email' => $email, 'password' => $password,  'loginError' => $loginError,  
-              'emailError' => $emailError, 'passwordError' => $passwordError, 'username' => $username];
+              'emailError' => $emailError, 'passwordError' => $passwordError, 'username' => $username, 'generalError' => $generalError];
 }
 
 function showLoginStart() {
