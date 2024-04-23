@@ -19,18 +19,16 @@ function validateLogin() {
 
     //logic to check file for valid userinfo
     require_once 'db.php';
-    $conn = connectToDB();
-    $query = getUserInfo($conn, $email);
-    $row = mysqli_fetch_assoc($query);
+    $user = getUserInfo($email);
     //get the hashed password from the database
-    $hashed_password = $row['pwd'];
+    $hashed_password = $user['pwd'];
     //echo $hashed_password;
     //echo $password;
     //echo [$query];
     //if account is found and password matches hashed password
-    if (mysqli_num_rows($query) === 1 && password_verify($password, $hashed_password)) {
+    if (password_verify($password, $hashed_password)) {
       //echo "log in was succesfull";
-      $username = $row['username'];
+      $username = $user['username'];
       
       $valid = true;
       
@@ -40,7 +38,6 @@ function validateLogin() {
       $loginError = "Invalid email or password";
       }
     }
-    mysqli_close($conn);
     }
     //$valid = true when email and password combination is found in file
     return [ 'valid' => $valid, 'email' => $email, 'password' => $password,  'loginError' => $loginError,  

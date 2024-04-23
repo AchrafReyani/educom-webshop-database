@@ -20,11 +20,13 @@ try {
 }
 
 //where is this function called?
-function getUserInfo($conn, $email) {
+function getUserInfo($email) {
+    $conn = connectToDB();
     $emailEscape = mysqli_real_escape_string($conn, $email);
-
     $query = mysqli_query($conn, "SELECT * FROM users WHERE email = '$emailEscape'");
-    return $query;
+    $user = mysqli_fetch_assoc($query);
+    mysqli_close($conn);
+    return $user;
 }
   
 

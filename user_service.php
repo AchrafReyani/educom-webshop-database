@@ -1,3 +1,9 @@
 <?php
-//TODO
+function authenticateUserByEmail($email, $password) {
+    
+}
+
+function authenticateUserByIdi($id, $password) {
+
+}
 ?>
