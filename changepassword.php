@@ -52,7 +52,7 @@ function validateChangePassword() {
           //write new db function called changepassword that does this
           $hashedPassword = password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
           //insert new password into database
-          updatePassword($conn, $_SESSION['email'], $hashedPassword);
+          updatePassword($_SESSION['email'], $hashedPassword);
             
           $valid = true;
             

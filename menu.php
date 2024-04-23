@@ -10,7 +10,12 @@ function showMenu($data) {
   foreach($data['menu'] as $link => $label) { 
     showMenuItem($link, $label); 
   }
+  //temporary solution to get username in menu bar
+  if (isset($_SESSION['username'])) {
+  echo "welcome back " . $_SESSION['username'];
+  }
   echo '</ul>' . PHP_EOL . '         </nav>' . PHP_EOL;  
+
 }
 ?>
 

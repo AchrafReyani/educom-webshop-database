@@ -100,10 +100,9 @@ function processRequest($page) {
       break;
 		case 'Contact';
       include 'contact.php';
-      $data = validateForm(); // Call the validation function from contact.php (assuming it's included)
-      // Handle the validation result
+      $data = validateForm();
       if ($data['valid']) {
-        // Form is valid, show Thank You page (or perform further actions)
+        //TODO send email to myself?
         $page = 'Thankyou';
       }
       break;
@@ -121,7 +120,6 @@ function processRequest($page) {
       if ($data['valid']) {
         doLoginUser($data['username'], $data['email']);
         $page = 'Home';
-        //set state to logged in
       }
       break;
     case 'Logout';
@@ -132,7 +130,6 @@ function processRequest($page) {
       include 'changePassword.php';
       $data = validateChangePassword();
       if ($data['valid']) {
-        //logout the user and send them back to the home page
         doLogoutUser();
         $page = 'Home';
       }

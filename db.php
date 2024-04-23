@@ -53,7 +53,7 @@ function getCurrentPassword($email) {
     return $row;
 }
 
-function updatePassword($conn, $email, $password) {
+function updatePassword($email, $password) {
     $conn = connectToDB();
     $emailEscape = mysqli_real_escape_string($conn, $email);
     $passwordEscape = mysqli_real_escape_string($conn, $password);
