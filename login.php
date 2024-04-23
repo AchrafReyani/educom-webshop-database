@@ -3,6 +3,7 @@ function validateLogin() {
     $email = $password = $username= "";   
     $loginError = $emailError = $passwordError = "";
     $valid = false;
+    $userid = null;
 
     if ($_SERVER ['REQUEST_METHOD'] === 'POST') {
     if (empty($_POST["email"])) {

@@ -68,7 +68,6 @@ function getRequestedPage() {
   
       $page = $_POST['page'];
       // Check if the requested page is Contact and perform validation
-       
     }
   
   } else {
@@ -79,7 +78,6 @@ function getRequestedPage() {
       $page = $_GET['page'];
     }
   }
-
   return $page;
 }
 
@@ -87,6 +85,7 @@ function getRequestedPage() {
 function getWebshopProducts() {
   include_once 'db.php';
   $products = getAllProducts();
+  echo is_null($products);
   return ['products' => $products];
 }
 
@@ -96,6 +95,7 @@ function processRequest($page) {
     case 'Webshop';
       include 'webshop.php';
       $data = getWebshopProducts();//get potential error message
+      echo is_null($data);
       break;
 		case 'Contact';
       include 'contact.php';
@@ -142,6 +142,7 @@ function processRequest($page) {
   if (isUserLoggedIn()) {
     $data['menu']['Logout'] = "Logout " . getUsername();
     $data['menu']['ChangePassword'] = 'Change Password';
+    $data['menu']['ShoppingCart'] = 'ShoppingCart';
   } else {
     echo "not logged in";
     $data['menu']['Login'] = 'Login';
