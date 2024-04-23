@@ -37,28 +37,27 @@ function validateChangePassword() {
 
         //only change the password when there are no errors and the current password is correct
         if (!$currentPasswordError && !$newPasswordError && !$confirmNewPasswordError) {
-            //connect to database
+        //connect to database
         //make db connection
-        require_once 'db.php';
-        $conn = connectToDB();
-
+          require_once 'db.php';
         //get current user's password
-        $query = getCurrentPassword($conn, $_SESSION['email']);
-        $row = mysqli_fetch_assoc($query);
+          $row = getCurrentPassword($_SESSION['email']);
         //get the hashed password from the database
-        $hashed_password = $row['pwd'];
+          $hashed_password = $row['pwd'];
+        
+        if (password_verify($currentPassword, $hashed_password)) {
+          // echo "password is correct";
+          //hash new password
 
-        if (mysqli_num_rows($query) === 1 && password_verify($currentPassword, $hashed_password)) {
-            // echo "password is correct";
-            //hash new password
-            $hashedPassword = password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
-            //insert new password into database
-            updatePassword($conn, $_SESSION['email'], $hashedPassword);
+          //write new db function called changepassword that does this
+          $hashedPassword = password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
+          //insert new password into database
+          updatePassword($conn, $_SESSION['email'], $hashedPassword);
             
-            $valid = true;
+          $valid = true;
             
-          } else {
-            $currentPasswordError = "Current password is incorrect";
+        } else {
+          $currentPasswordError = "Current password is incorrect";
           }
         }
     }

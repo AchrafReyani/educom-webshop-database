@@ -52,23 +52,26 @@ function registerNewUser($conn, $email, $name, $password) {
   }
 
 
-function getCurrentPassword($conn, $email) {
+function getCurrentPassword($email) {
+    $conn = connectToDB();
     $emailEscape = mysqli_real_escape_string($conn, $email);
     $query = mysqli_query($conn, "SELECT pwd FROM users WHERE email = '$emailEscape'");
-    return $query;
+    $row = mysqli_fetch_assoc($query);
+    mysqli_close($conn);
+    return $row;
 }
 
 function updatePassword($conn, $email, $password) {
+    $conn = connectToDB();
     $emailEscape = mysqli_real_escape_string($conn, $email);
     $passwordEscape = mysqli_real_escape_string($conn, $password);
     
     $query = "UPDATE users SET pwd = '$passwordEscape' WHERE email = '$emailEscape'";
     mysqli_query($conn, $query);
+    mysqli_close($conn);
 }
 
 function getAllProducts($conn) {
-    
-    
     $sql = "SELECT id, name, description, price, image FROM products";
     $query = mysqli_query($conn, $sql);
     

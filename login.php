@@ -20,11 +20,8 @@ function validateLogin() {
     //logic to check file for valid userinfo
     require_once 'db.php';
     $user = getUserInfo($email);
-    //get the hashed password from the database
+    //store the hashed password from the database
     $hashed_password = $user['pwd'];
-    //echo $hashed_password;
-    //echo $password;
-    //echo [$query];
     //if account is found and password matches hashed password
     if (password_verify($password, $hashed_password)) {
       //echo "log in was succesfull";
