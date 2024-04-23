@@ -42,9 +42,6 @@ function validateChangePassword() {
           
           require_once 'db.php';
           //get current user's password
-          echo "33333333333333333333333333333333333333";
-          echo $_SESSION['userid'];
-          echo "33333333333333333333333333333333333333";
           $row = getCurrentPassword($_SESSION['userid']);
           //get the hashed password from the database
           $hashed_password = $row['pwd'];

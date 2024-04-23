@@ -1,68 +1,58 @@
-
 <?php 
-  function validateForm() { 
-      //add empty values to variables
+function validateForm() { 
+  //add empty values to variables
   $pronouns = $name = $email = $phonenumber = $street = $housenumber = $postalcode =
   $city = $communication = $message = "";
 
   //initiate error message variables
   $pronounsError = $nameError = $emailError = $phonenumberError = $streetError = $housenumberError = $postalcodeError = $cityError = $communicationError = $messageError = "";
-    $valid = false;
+  $valid = false;
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-      //save input if valid and send error message when not valid
+    //save input if valid and send error message when not valid
 
-      //mandatory fields
-      if (empty($_POST["pronouns"])) {
-        $pronounsError = "Pronouns are required";
-      } else {
-        $pronouns = $_POST['pronouns'];
-      }
-
+    //mandatory fields
+    if (empty($_POST["pronouns"])) {
+      $pronounsError = "Pronouns are required";
+    } else {
+      $pronouns = $_POST['pronouns'];
+    }
 
     if (empty($_POST["name"])) {
-        $nameError = "Name is required";
-      } 
-      else {
-        $name = $_POST['name'];
-      }
+      $nameError = "Name is required";
+    } else {
+      $name = $_POST['name'];
+    }
 
-      if (empty($_POST["communication"])) {
-        $communicationError = "Communication method is required";
-      } else {
-        $communication = $_POST['communication'];
-      }
+    if (empty($_POST["communication"])) {
+      $communicationError = "Communication method is required";
+    } else {
+      $communication = $_POST['communication'];
+    }
 
-      if (empty($_POST["message"])) {
-        $messageError = "Message is required";
-      } else {
-        $message = $_POST['message'];
-      }
-
+    if (empty($_POST["message"])) {
+      $messageError = "Message is required";
+    } else {
+      $message = $_POST['message'];
+    }
 
       //send error message depending on the communication method
 
-      if ($communication == "email") {
-        echo 'email was communication';
-        if (empty($_POST["email"])) {
-          $emailError = "Email is required";
-        } 
-        else {
-          $email = $_POST['email'];
-        }
-      
-      }else if ($communication == "phone") {
-
+    if ($communication == "email") {
+      echo 'email was communication';
+      if (empty($_POST["email"])) {
+        $emailError = "Email is required";
+      } else {
+      $email = $_POST['email'];
+      } 
+    } else if ($communication == "phone") {
         if (empty($_POST["phonenumber"])) {
           $phonenumberError = "Phone number is required";
-        } 
-        else {
+        } else {
           $phonenumber = $_POST['phonenumber'];
-  
         } 
-      
-      }else if ($communication == "postal") {
+        }else if ($communication == "postal") {
 
         if (empty($_POST["street"])) {
           $streetError = "Street is required";
@@ -119,23 +109,22 @@
     }
 
   //TODO handle return statement inside index
-    return [ 'valid' => $valid, 'pronouns' => $pronouns, 'name' => $name, 'email' => $email, 'phonenumber' => $phonenumber, 'street' => $street, 
+  return [ 'valid' => $valid, 'pronouns' => $pronouns, 'name' => $name, 'email' => $email, 'phonenumber' => $phonenumber, 'street' => $street, 
              'housenumber' => $housenumber, 'postalcode' => $postalcode, 'city' => $city, 'communication' => $communication, 'message' => $message,
              'pronounsError' => $pronounsError, 'nameError' => $nameError, 'emailError' => $emailError, 'phonenumberError' => $phonenumberError, 'streetError' => $streetError, 'housenumberError' => $housenumberError, 'postalcodeError' => $postalcodeError, 'cityError' => $cityError, 'communicationError' => $communicationError, 'messageError' => $messageError ];
   }
 
-  function showFormStart() {
-    echo "<h2>Contact Me</h2>
-
-    <p>If you have any questions or comments, please feel free to contact me using the form below.</p>
-    <form action=\"index.php\" method=\"POST\">
-    <input name=\"page\" value=\"Contact\" type=\"hidden\">
-    ";
-  }
+function showFormStart() {
+  echo "<h2>Contact Me</h2>
+  <p>If you have any questions or comments, please feel free to contact me using the form below.</p>
+  <form action=\"index.php\" method=\"POST\">
+  <input name=\"page\" value=\"Contact\" type=\"hidden\">
+  ";
+}
 
   //shows all the input fields and errors
-  function showFormField($fieldName, $label, $data, $options = NULL) {
-    if ($options == NULL) {
+function showFormField($fieldName, $label, $data, $options = NULL) {
+  if ($options == NULL) {
     echo "
     <div>
     <label for=\"$fieldName\">$label:</label>
@@ -143,49 +132,47 @@
     <span>* " . $data[$fieldName . "Error"]  . "</span>
     </div>";
   } else if ($options == 'PRONOUN') {
-    echo "
-    <div>
-  <label for=\"$fieldName\">$label:</label>
-  <select name=\"$fieldName\" value=\"". $data[$fieldName]."\">
-    <option value=\"\">Please select a pronoun</option>
-    <option value=\"he/him\" ". ($data[$fieldName] == "he/him" ? "selected=\"selected\"" : "").">He/him</option>
-    <option value=\"she/her\" " . ($data[$fieldName] == "she/her" ? "selected=\"selected\"" : "").">She/her</option>
-    <option value=\"they/them\" ". ($data[$fieldName] == "they/them" ? "selected=\"selected\"" : "").">They/them</option>
-    <option value=\"other\" ". ($data[$fieldName] == "other" ? "selected=\"selected\"" : "").">Other</option>
-    <option value=\"prefer not to say\" ". ($data[$fieldName] == "prefer not to say" ? "selected=\"selected\"" : "").">Prefer not to say</option>
-  </select>
-  <span>* " . $data[$fieldName . "Error"]  . "</span>
-  </div>
-    ";
-  } else if ($options == 'COMMUNICATION') {
-    $communicationmethod = ["email", "phone", "postal"];
+      echo "
+      <div>
+      <label for=\"$fieldName\">$label:</label>
+      <select name=\"$fieldName\" value=\"". $data[$fieldName]."\">
+      <option value=\"\">Please select a pronoun</option>
+      <option value=\"he/him\" ". ($data[$fieldName] == "he/him" ? "selected=\"selected\"" : "").">He/him</option>
+      <option value=\"she/her\" " . ($data[$fieldName] == "she/her" ? "selected=\"selected\"" : "").">She/her</option>
+      <option value=\"they/them\" ". ($data[$fieldName] == "they/them" ? "selected=\"selected\"" : "").">They/them</option>
+      <option value=\"other\" ". ($data[$fieldName] == "other" ? "selected=\"selected\"" : "").">Other</option>
+      <option value=\"prefer not to say\" ". ($data[$fieldName] == "prefer not to say" ? "selected=\"selected\"" : "").">Prefer not to say</option>
+      </select>
+      <span>* " . $data[$fieldName . "Error"]  . "</span>
+      </div>
+      ";
+    } else if ($options == 'COMMUNICATION') {
+      $communicationmethod = ["email", "phone", "postal"];
       $communicationError = "";
-
-    echo "
+      echo "
       <div>
         <p>Preferred Communication Method:</p> <span>* $communicationError</span>
-    ";
+      ";
   
-    foreach ($communicationmethod as $method) {
+      foreach ($communicationmethod as $method) {
       $methodId = lcfirst($method) . "-communication"; // Generate unique ID for each radio button
       echo "
-        <label for=\"$methodId\">$method</label>
-        <input type=\"radio\" id=\"$methodId\" name=\"communication\" value=\"$method\" " . ($data["communication"] == $method ? "checked" : "") . ">
+      <label for=\"$methodId\">$method</label>
+      <input type=\"radio\" id=\"$methodId\" name=\"communication\" value=\"$method\" " . ($data["communication"] == $method ? "checked" : "") . ">
       ";
-    }
-  
+      }
     echo "</div>";
   }
-  }
+}
 
-  function showFormEnd() {
-    echo "<div>
-    <input type=\"submit\" value=\"Send\">
-    </div>
+function showFormEnd() {
+  echo "<div>
+  <input type=\"submit\" value=\"Send\">
+  </div>
   </form>";
-  }
+}
 
-function showContactPage($data){ 
+function showContactPage($data) { 
   showFormStart();
   showFormField("pronouns", "Pronouns", $data, 'PRONOUN');
   showFormField("name", "Name", $data, NULL); 

@@ -15,29 +15,29 @@ session_start(); //start session
 function showContent($data) {
 
   $page = explode('&', $data['page'])[0]; // Get first part before '&'
-	switch($page)
-	{
-		case 'Home';
+  switch($page)
+  {
+    case 'Home';
       include 'home.php';
-		  showHomePage();
-		  break;
-		case 'About';
+      showHomePage();
+      break;
+    case 'About';
       include 'about.php';
-		  showAboutPage();
-		  break;
-		case 'Contact';
-		  showContactPage($data);
+      showAboutPage();
+      break;
+    case 'Contact';
+      showContactPage($data);
       break;
     case 'Thankyou';
       include 'thankyou.php';
       showThankYouPage($data);
       break;
     case 'Register';
-		  showRegisterPage($data);
-		  break;
-		case 'Login';
-		  showLoginPage($data);
-		  break;
+  	  showRegisterPage($data);
+      break;
+    case 'Login';
+      showLoginPage($data);
+      break;
     case 'ChangePassword';
       showChangePasswordPage($data);
       break;
@@ -53,10 +53,9 @@ function showContent($data) {
       include 'shoppingCart.php';
       showShoppingCartPage($data);
       break;
-
-		default; 
-		  showHomePage();
-	}
+    default; 
+      showHomePage();
+  }
 }
 
 function getRequestedPage() {

@@ -2,7 +2,6 @@
 function doLoginUser($username, $id) {
     $_SESSION['username'] = $username;
     $_SESSION['userid'] = $id;//currently used for changing the user's password
-    echo $id;
 }
 
 function doLogoutUser() {
@@ -15,6 +14,5 @@ function getUsername() {
 }
 
 function isUserLoggedIn() {
-    echo 'isUserLoggedIn';
     return isset($_SESSION['username']);
 }

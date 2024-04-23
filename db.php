@@ -15,10 +15,6 @@ function getUserInfo($email) {
     $emailEscape = mysqli_real_escape_string($conn, $email);
     $query = mysqli_query($conn, "SELECT * FROM users WHERE email = '$emailEscape'");
     $user = mysqli_fetch_assoc($query);
-    echo $user['username'];
-    echo $user['id'];
-    echo $user['email'];
-    echo $user['pwd'];
     mysqli_close($conn);
     return $user;
 }
