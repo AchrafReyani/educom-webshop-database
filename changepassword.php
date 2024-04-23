@@ -39,9 +39,13 @@ function validateChangePassword() {
         if (!$currentPasswordError && !$newPasswordError && !$confirmNewPasswordError) {
           //connect to database
           //make db connection
+          
           require_once 'db.php';
           //get current user's password
-          $row = getCurrentPassword($_SESSION['email']);
+          echo "33333333333333333333333333333333333333";
+          echo $_SESSION['userid'];
+          echo "33333333333333333333333333333333333333";
+          $row = getCurrentPassword($_SESSION['userid']);
           //get the hashed password from the database
           $hashed_password = $row['pwd'];
         
@@ -52,7 +56,7 @@ function validateChangePassword() {
           //write new db function called changepassword that does this
           $hashedPassword = password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
           //insert new password into database
-          updatePassword($_SESSION['email'], $hashedPassword);
+          updatePassword($_SESSION['userid'], $hashedPassword);
             
           $valid = true;
             

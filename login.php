@@ -27,7 +27,7 @@ function validateLogin() {
     if (password_verify($password, $hashed_password)) {
       //echo "log in was succesfull";
       $username = $user['username'];
-      
+      $userid = $user['id'];
       $valid = true;
       
     } else {
@@ -42,7 +42,7 @@ function validateLogin() {
     }
   }
     //$valid = true when email and password combination is found in file
-    return [ 'valid' => $valid, 'email' => $email, 'password' => $password,  'loginError' => $loginError,  
+    return [ 'userid' => $userid, 'valid' => $valid, 'email' => $email, 'password' => $password,  'loginError' => $loginError,  
               'emailError' => $emailError, 'passwordError' => $passwordError, 'username' => $username, 'generalError' => $generalError];
 }
 

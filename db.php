@@ -1,6 +1,6 @@
 <?php
 function connectToDB() {
-    $servername ="localhost";
+    $servername = "localhost";
     $dbusername = "WebShopUser";
     $dbpassword = "mBAgRiGMZe7wPq5WAjb6";
     $dbName = "achraf_webshop";
@@ -15,6 +15,10 @@ function getUserInfo($email) {
     $emailEscape = mysqli_real_escape_string($conn, $email);
     $query = mysqli_query($conn, "SELECT * FROM users WHERE email = '$emailEscape'");
     $user = mysqli_fetch_assoc($query);
+    echo $user['username'];
+    echo $user['id'];
+    echo $user['email'];
+    echo $user['pwd'];
     mysqli_close($conn);
     return $user;
 }
@@ -44,21 +48,22 @@ function registerNewUser($email, $name, $password) {
   }
 
 
-function getCurrentPassword($email) {
+function getCurrentPassword($id) {
     $conn = connectToDB();
-    $emailEscape = mysqli_real_escape_string($conn, $email);
-    $query = mysqli_query($conn, "SELECT pwd FROM users WHERE email = '$emailEscape'");
+    $idEscape = mysqli_real_escape_string($conn, $id);
+    $query = mysqli_query($conn, "SELECT pwd FROM users WHERE id = '$idEscape'");
     $row = mysqli_fetch_assoc($query);
+    echo $row['pwd'];
     mysqli_close($conn);
     return $row;
 }
 
-function updatePassword($email, $password) {
+function updatePassword($id, $password) {
     $conn = connectToDB();
-    $emailEscape = mysqli_real_escape_string($conn, $email);
+    $idEscape = mysqli_real_escape_string($conn, $id);
     $passwordEscape = mysqli_real_escape_string($conn, $password);
     
-    $query = "UPDATE users SET pwd = '$passwordEscape' WHERE email = '$emailEscape'";
+    $query = "UPDATE users SET pwd = '$passwordEscape' WHERE id = '$idEscape'";
     mysqli_query($conn, $query);
     mysqli_close($conn);
 }

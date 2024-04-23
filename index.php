@@ -118,7 +118,7 @@ function processRequest($page) {
       include 'login.php';
       $data = validateLogin();
       if ($data['valid']) {
-        doLoginUser($data['username'], $data['email']);
+        doLoginUser($data['username'], $data['userid']);
         $page = 'Home';
       }
       break;

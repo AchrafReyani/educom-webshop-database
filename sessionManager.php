@@ -1,12 +1,13 @@
 <?php
-function doLoginUser($username, $email) {
+function doLoginUser($username, $id) {
     $_SESSION['username'] = $username;
-    $_SESSION['email'] = $email;//currently used for changing the user's password
+    $_SESSION['userid'] = $id;//currently used for changing the user's password
+    echo $id;
 }
 
 function doLogoutUser() {
     unset($_SESSION['username']);
-    unset($_SESSION['email']);
+    unset($_SESSION['userid']);
 }
 
 function getUsername() {
