@@ -141,7 +141,7 @@ function processRequest($page) {
   //add menu buttons depending on user being logged in or not
   $data['menu'] = array('Home' => 'Home', 'About' => 'About', 'Contact' => 'Contact', 'Webshop' => 'Webshop');
   if (isUserLoggedIn()) {
-    $data['menu']['Logout'] = 'Logout';
+    $data['menu']['Logout'] = "Logout " . getUsername();
     $data['menu']['ChangePassword'] = 'Change Password';
   } else {
     echo "not logged in";
