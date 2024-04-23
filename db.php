@@ -71,10 +71,10 @@ function updatePassword($conn, $email, $password) {
     mysqli_close($conn);
 }
 
-function getAllProducts($conn) {
+function getAllProducts() {
+    $conn = connectToDB();
     $sql = "SELECT id, name, description, price, image FROM products";
     $query = mysqli_query($conn, $sql);
-    
     return $query;
 }
 

@@ -37,12 +37,12 @@ function validateChangePassword() {
 
         //only change the password when there are no errors and the current password is correct
         if (!$currentPasswordError && !$newPasswordError && !$confirmNewPasswordError) {
-        //connect to database
-        //make db connection
+          //connect to database
+          //make db connection
           require_once 'db.php';
-        //get current user's password
+          //get current user's password
           $row = getCurrentPassword($_SESSION['email']);
-        //get the hashed password from the database
+          //get the hashed password from the database
           $hashed_password = $row['pwd'];
         
         if (password_verify($currentPassword, $hashed_password)) {

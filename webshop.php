@@ -5,8 +5,7 @@ function showWebshopStart() {
 
 function showWebshopContent() {
     require_once 'db.php';
-    $conn = connectToDB();
-    $result = getAllProducts($conn);
+    $result = getAllProducts();
 
     echo "<div class = 'products'>";
     while($row = mysqli_fetch_assoc($result)) {
@@ -32,6 +31,7 @@ function showWebshopContent() {
         }
       }
       echo "</div>";
+      
 }
 
 function showWebshopPage() {
