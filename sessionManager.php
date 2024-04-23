@@ -14,5 +14,6 @@ function getUsername() {
 }
 
 function isUserLoggedIn() {
+    echo 'isUserLoggedIn';
     return isset($_SESSION['username']);
 }

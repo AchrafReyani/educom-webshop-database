@@ -129,6 +129,18 @@ function processRequest($page) {
       default;
       break;
     }
+  
+  //add menu buttons depending on user being logged in or not
+  $data['menu'] = array('Home' => 'Home', 'About' => 'About', 'Contact' => 'Contact', 'Webshop' => 'Webshop');
+  if (isUserLoggedIn()) {
+    $data['menu']['Logout'] = 'Logout';
+    $data['menu']['ChangePassword'] = 'Change Password';
+  } else {
+    echo "not logged in";
+    $data['menu']['Login'] = 'Login';
+    $data['menu']['Register'] = 'Register';
+
+  }
     $data['page'] = $page; //add value of current page to the data
     return $data;
 }
@@ -136,7 +148,7 @@ function processRequest($page) {
 function showResponsePage($data) {
 	beginDocument();
 	showHeader();
-	showMenu();
+	showMenu($data);
 	showContent($data); //use the data received to fill in unifinished form with valid data
 	showFooter();
 	endDocument();

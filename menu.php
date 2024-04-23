@@ -1,20 +1,16 @@
  <?php 
-//if user is logged in only show logout button, if user is not logged in show login and register buttons
-function showMenu() {
-  echo '<ul class=\'menu\'>
-  <li><a href=\'index.php?page=Home\'>Home</a></li>
-  <li><a href=\'index.php?page=About\'>About</a></li>
-  <li><a href=\'index.php?page=Contact\'>Contact</a></li>
-  <li><a href=\'index.php?page=Webshop\'>Webshop</a></li>' . PHP_EOL;
-  if (isUserLoggedIn()) {
-    echo '  <li><a href=\'index.php?page=Logout\'>Logout ' . getUsername() .'</a></li>';
-    echo '  <li><a href=\'index.php?page=ChangePassword\'>Change Password</a></li>';
-    echo '  <li><a href=\'index.php?page=ShoppingCart\'>Cart</a></li>';
-  } else {
-    echo '  <li><a href=\'index.php?page=Login\'>Login</a></li>
-  <li><a href=\'index.php?page=Register\'>Register</a></li>';
-  } 
-  echo '</ul>';
+//print every menu label
+function showMenuItem($link, $label) { 
+  echo '<li><a href=\index.php?page='. $link .'>' . $label . '</a></li>' . PHP_EOL; 
+} 
+
+function showMenu($data) {  
+  echo '<nav> 
+  <ul class="menu">'; 
+  foreach($data['menu'] as $link => $label) { 
+    showMenuItem($link, $label); 
+  }
+  echo '</ul>' . PHP_EOL . '         </nav>' . PHP_EOL;  
 }
 ?>
 
