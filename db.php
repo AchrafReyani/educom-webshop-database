@@ -1,7 +1,7 @@
 <?php
 function connectToDB() {
     $servername ="localhost";
-    $dbusername = "ebShopUser";
+    $dbusername = "WebShopUser";
     $dbpassword = "mBAgRiGMZe7wPq5WAjb6";
     $dbName = "achraf_webshop";
     // create connection
@@ -62,10 +62,17 @@ function updatePassword($conn, $email, $password) {
 }
 
 function getAllProducts() {
+    $products = array();
     $conn = connectToDB();
     $sql = "SELECT id, name, description, price, image FROM products";
+    
     $query = mysqli_query($conn, $sql);
-    return $query;
+    
+    while($row = mysqli_fetch_assoc($query)) {
+        $products[$row['id']] = $row;
+    }
+    mysqli_close($conn);
+    return $products;
 }
 
 function getProductDetails($conn, $id) {

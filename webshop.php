@@ -9,12 +9,12 @@ function showWebshopContent() {
     $result = getAllProducts();
 
     echo "<div class = 'products'>";
-    while($row = mysqli_fetch_assoc($result)) {
-        $id = $row["id"];
-        $name = $row["name"];
+    foreach ($data['products'] as $product) {
+        $id = $product["id"];
+        $name = $product["name"];
         //$description = $row["description"];
-        $price = $row["price"];
-        $image = $row["image"];
+        $price = $product["price"];
+        $image = $product["image"];
     
         // Display product information
         echo "<a href='index.php?page=Product&id=$id' div class='product'>";

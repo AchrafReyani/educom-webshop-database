@@ -83,12 +83,19 @@ function getRequestedPage() {
   return $page;
 }
 
+//TODO this probably shouldn't be here
+function getWebshopProducts() {
+  include_once 'db.php';
+  $products = getAllProducts();
+  return ['products' => $products];
+}
+
 function processRequest($page) {
   switch($page)
 	{
     case 'Webshop';
       include 'webshop.php';
-      $data = showWebshopContent();//get potential error message
+      $data = getWebshopProducts();//get potential error message
       break;
 		case 'Contact';
       include 'contact.php';
