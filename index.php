@@ -145,13 +145,25 @@ function processRequest($page) {
     return $data;
 }
 
+function showGeneralError($data) {
+  if (!empty($data['generalError'])) {
+    echo '<div class="error">' . $data['generalError'] . '</div>';
+  }
+}
+
+
 function showResponsePage($data) {
 	beginDocument();
 	showHeader();
 	showMenu($data);
+  showGeneralError($data);
 	showContent($data); //use the data received to fill in unifinished form with valid data
 	showFooter();
 	endDocument();
+}
+
+function logError($msg) {
+  echo "LOGGING TO THE SERVER: " . $msg;
 }
 
 //start of application
