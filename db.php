@@ -20,7 +20,8 @@ function getUserInfo($email) {
 }
   
 
-function registerNewUser($conn, $email, $name, $password) {
+function registerNewUser($email, $name, $password) {
+    $conn = connectToDB();
     //use a prepared statement to safely insert user data
     $stmt = mysqli_prepare($conn, "INSERT INTO users (email, username, pwd) VALUES (?, ?, ?)");
     if (!$stmt) {
@@ -39,6 +40,7 @@ function registerNewUser($conn, $email, $name, $password) {
   
     // Close the statement
     mysqli_stmt_close($stmt);
+    mysqli_close($conn);
   }
 
 

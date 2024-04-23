@@ -1,6 +1,7 @@
 <?php
 //mandatory includes for all pages
 include "sessionManager.php";
+include 'user_service.php';
 include 'header.php';
 include 'menu.php';
 include 'footer.php';
@@ -111,8 +112,7 @@ function processRequest($page) {
       $data = validateRegistration();
       if ($data['valid']) {
         $page = 'Home';
-        //set state to logged in?
-        //write user to file
+        storeUser($data['email'], $data['name'], $data['password']);
       }
       break;
     case 'Login';

@@ -54,30 +54,14 @@
               $confirm_passwordError = "Passwords do not match";
             }
 
-               //check if email already exists
-              //TODO ook bij de if hieronder
-              
-              
-               
-
-              try {      
-                //SQL INSERT
-        require_once 'db.php';
-        $conn = connectToDB();
-       //check if  there are no errors     
+      
+       //if no errors were found set valid to true  
       if ($emailError == "" && $nameError == "" && $passwordError == "" && $confirm_passwordError == "") {
         $valid = true;
-         //write accountinfo to the users table
-        
-        $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        registerNewUser($conn, $email, $name, $hashedPassword);
-        mysqli_close($conn);
         }
-      } catch (Exception $e) {
-          $generalError = "Could not connect to the database, You cannot register at this time. Please try again later.";
-      }
+      
     }
-     return [ 'valid' => $valid,  'name' => $name, 'email' => $email, 'password' => $password, 'confirm_password' => $confirm_password, 'passwordError' => $passwordError, 'confirm_passwordError' => $confirm_passwordError, 'nameError' => $nameError, 'emailError' => $emailError, 'generalError' => $generalError];
+     return [ 'valid' => $valid,  'name' => $name, 'email' => $email, 'password' => $password, 'confirm_password' => $confirm_password, 'passwordError' => $passwordError, 'confirm_passwordError' => $confirm_passwordError, 'nameError' => $nameError, 'emailError' => $emailError];
 }
   
 function showRegisterStart() {
