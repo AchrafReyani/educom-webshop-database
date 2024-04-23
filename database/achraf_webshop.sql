@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 19 apr 2024 om 18:59
+-- Gegenereerd op: 23 apr 2024 om 11:59
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.2.12
 
@@ -20,6 +20,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `achraf_webshop`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(10) NOT NULL,
+  `date` date NOT NULL,
+  `user_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -64,13 +76,21 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `pwd`) VALUES
-(12, 'voetballer@gmail.com', 'voetbal speler', '$2y$10$nc2KlQTW6YSiNniFPc4DK.0K3YTilOhoRLi6nPobD44//tyhp/CfC'),
+(12, 'voetballer@gmail.com', 'voetbal speler', '$2y$10$j1FX.nRRSoQZhWSTD.Xp8.DsOmw.9s8Sd7t/3ad1GTm7Qsun0.ckS'),
 (13, 'achraf@gmail.com', 'achraf', '$2y$10$TCBHjD3lgCvLKLYAAEt.feO/p49y9vCwfD1vSaWyDmRbqWfdbhMUy'),
-(14, 'test@gmail.com', 'test', '$2y$10$3dyy8/r957uhHPgnjEX4v.7RfPlS3SXnZFJX2lnFF1FOyWPC10dnO');
+(14, 'test@gmail.com', 'test', '$2y$10$3dyy8/r957uhHPgnjEX4v.7RfPlS3SXnZFJX2lnFF1FOyWPC10dnO'),
+(15, 'email@email.com', 'nieuwegebruiker', '$2y$10$ekuO90nqHGQB4vWigAutPe4DfQ94sJ3SAai0len8KH4xuV.LYh1FO');
 
 --
 -- Indexen voor geëxporteerde tabellen
 --
+
+--
+-- Indexen voor tabel `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `link order to user with id` (`user_id`);
 
 --
 -- Indexen voor tabel `products`
@@ -89,6 +109,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT voor een tabel `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT voor een tabel `products`
 --
 ALTER TABLE `products`
@@ -98,7 +124,17 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- Beperkingen voor geëxporteerde tabellen
+--
+
+--
+-- Beperkingen voor tabel `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `link order to user with id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
