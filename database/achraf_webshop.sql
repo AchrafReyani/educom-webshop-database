@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 23 apr 2024 om 11:59
+-- Gegenereerd op: 23 apr 2024 om 16:21
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.2.12
 
@@ -31,6 +31,19 @@ CREATE TABLE `orders` (
   `id` int(10) NOT NULL,
   `date` date NOT NULL,
   `user_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `order_rows`
+--
+
+CREATE TABLE `order_rows` (
+  `id` int(10) NOT NULL,
+  `order_id` int(10) NOT NULL,
+  `product_id` int(10) NOT NULL,
+  `quantity` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -79,7 +92,9 @@ INSERT INTO `users` (`id`, `email`, `username`, `pwd`) VALUES
 (12, 'voetballer@gmail.com', 'voetbal speler', '$2y$10$j1FX.nRRSoQZhWSTD.Xp8.DsOmw.9s8Sd7t/3ad1GTm7Qsun0.ckS'),
 (13, 'achraf@gmail.com', 'achraf', '$2y$10$TCBHjD3lgCvLKLYAAEt.feO/p49y9vCwfD1vSaWyDmRbqWfdbhMUy'),
 (14, 'test@gmail.com', 'test', '$2y$10$3dyy8/r957uhHPgnjEX4v.7RfPlS3SXnZFJX2lnFF1FOyWPC10dnO'),
-(15, 'email@email.com', 'nieuwegebruiker', '$2y$10$ekuO90nqHGQB4vWigAutPe4DfQ94sJ3SAai0len8KH4xuV.LYh1FO');
+(15, 'email@email.com', 'nieuwegebruiker', '$2y$10$ekuO90nqHGQB4vWigAutPe4DfQ94sJ3SAai0len8KH4xuV.LYh1FO'),
+(17, 'test5@test.com', 'test5', '$2y$10$nf7/vxqmg5JHcMQRlWiEB.7dSqMtW0VmpkVbrBgFfbnL3uhT4aYSa'),
+(18, 'new@mail.com', 'newuser', '$2y$10$w4BG8IrCRKOeSdyHAbIEPuPLrKFVM248oT5nqx3FzTg7nLLNV2NmK');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -91,6 +106,14 @@ INSERT INTO `users` (`id`, `email`, `username`, `pwd`) VALUES
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
   ADD KEY `link order to user with id` (`user_id`);
+
+--
+-- Indexen voor tabel `order_rows`
+--
+ALTER TABLE `order_rows`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `foreign key for order id with id from order` (`order_id`),
+  ADD KEY `foreign key for product id with id from product` (`product_id`);
 
 --
 -- Indexen voor tabel `products`
@@ -115,6 +138,12 @@ ALTER TABLE `orders`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT voor een tabel `order_rows`
+--
+ALTER TABLE `order_rows`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT voor een tabel `products`
 --
 ALTER TABLE `products`
@@ -124,7 +153,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Beperkingen voor geëxporteerde tabellen
@@ -135,6 +164,13 @@ ALTER TABLE `users`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `link order to user with id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Beperkingen voor tabel `order_rows`
+--
+ALTER TABLE `order_rows`
+  ADD CONSTRAINT `foreign key for order id with id from order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
+  ADD CONSTRAINT `foreign key for product id with id from product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

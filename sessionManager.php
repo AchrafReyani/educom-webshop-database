@@ -16,3 +16,21 @@ function getUsername() {
 function isUserLoggedIn() {
     return isset($_SESSION['username']);
 }
+
+function makeShoppingCart() {
+    $_SESSION['shoppingCart'] = [];
+}
+
+//gets called either when an order has been made or if the user logs out.
+function removeShoppingCart() {
+    unset($_SESSION['shoppingCart']);
+}
+
+function addToShoppingCart($id) {
+    if (empty($_SESSION['shoppingCart'][$id])) {
+        $_SESSION['shoppingCart'][$id] = 1;
+    } else {
+        $_SESSION['shoppingCart'][$id]++;
+    }
+}
+?>

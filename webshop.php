@@ -3,10 +3,20 @@ function showWebshopStart() {
   echo "<h2>Webshop</h2>";
 }
 
-function showWebshopContent() {
+//TODO
+function addToCartButton($id) {
+  echo "<form action='index.php' method='POST'>
+  <input type='hidden' name='itemId' value=".$id.">  <button type='submit'>Add to Cart</button>
+  </form>";
+
+  return ['id' => $id ];
+
+}
+
+function showWebshopContent($data) {
   try {
-  require_once 'db.php';
-  $result = getAllProducts();
+  //require_once 'db.php';
+  //$result = getAllProducts();
 
   echo "<div class = 'products'>";
   foreach ($data['products'] as $product) {
@@ -27,7 +37,6 @@ function showWebshopContent() {
     echo "</div>";
     echo "</a>";
     if(isUserLoggedIn()) {
-        include_once 'shoppingCart.php';
         addToCartButton($id);
     }
   }
@@ -38,8 +47,8 @@ function showWebshopContent() {
   return [ 'generalError' => $generalError ];
 }
 
-function showWebshopPage() {
+function showWebshopPage($data) {
     showWebshopStart();
-    showWebshopContent();
+    showWebshopContent($data);
 }
 ?>

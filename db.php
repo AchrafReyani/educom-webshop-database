@@ -86,4 +86,19 @@ function getProductDetails($conn, $id) {
     
     return $query;
 }
+
+//TODO make function
+function getShoppingCart($id) {
+    $conn = connectToDB();
+    $idEscape = mysqli_real_escape_string($conn, $id);
+    $sql = "SELECT * FROM order_rows WHERE user_id = $idEscape";
+    $sql = "SELECT * FROM orders INNER JOIN ";
+    $query = mysqli_query($conn, $sql);
+}
+
+//TODO make function
+function placeOrder() {
+
+}
+
 ?>

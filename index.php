@@ -14,7 +14,8 @@ session_start(); //start session
 //functions
 function showContent($data) {
 
-  $page = explode('&', $data['page'])[0]; // Get first part before '&'
+  //$page = explode('&', $data['page'])[0]; // Get first part before '&'
+  $page = $data['page'];
   switch($page)
   {
     case 'Home';
@@ -43,7 +44,7 @@ function showContent($data) {
       break;
     case 'Webshop';
       //include 'webshop.php';
-      showWebshopPage();
+      showWebshopPage($data);
       break;
     case 'Product';
       include 'product.php';
@@ -95,7 +96,11 @@ function processRequest($page) {
     case 'Webshop';
       include 'webshop.php';
       $data = getWebshopProducts();//get potential error message
-      echo is_null($data);
+      var_dump($data);
+      break;
+    case 'addToCart';
+      $data = addToCartButton();
+      $page = 'Webshop';
       break;
 		case 'Contact';
       include 'contact.php';
@@ -118,11 +123,13 @@ function processRequest($page) {
       $data = validateLogin();
       if ($data['valid']) {
         doLoginUser($data['username'], $data['userid']);
+        makeShoppingCart();//make shopping cart session variable when user logs in
         $page = 'Home';
       }
       break;
     case 'Logout';
       doLogoutUser();
+      removeShoppingCart();
       $page = 'Home';
       break;
     case 'ChangePassword';
