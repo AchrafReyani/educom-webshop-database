@@ -1,10 +1,10 @@
 <?php
 function authenticateUserByEmail($email, $password) {
-   //TODO 
+   //TODO (#11)
 }
 
-function authenticateUserByIdi($id, $password) {
-    //TODO
+function authenticateUserById($id, $password) {
+    //TODO (#11)
 }
 
 function storeUser($email, $name, $password) {

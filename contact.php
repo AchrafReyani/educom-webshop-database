@@ -90,20 +90,20 @@ function validateForm() {
       }
 
       //TODO check to see if this can be made smaller
-    if ($_POST['communication'] == "email" && empty($_POST["email"])) {
+    if ($communication == "email" && empty($_POST["email"])) {
         $emailError = "Please enter a valid email address";
-      } else if ($_POST["communication"] == "email" && !empty($_POST["email"]) &&  $requiredFields ) {
+      } else if ($communication == "email" && !empty($_POST["email"]) &&  $requiredFields ) {
           $valid  = true;
       }
 
-    if ($_POST["communication"] == "phone" && empty($_POST["phonenumber"])) {
+    if ($communication == "phone" && empty($_POST["phonenumber"])) {
         $phonenumberError = "Please enter a valid phone number";
-      } else if ($_POST["communication"] == "phone" && !empty($_POST["phonenumber"]) &&  $requiredFields)
+      } else if ($communication == "phone" && !empty($_POST["phonenumber"]) &&  $requiredFields)
       {
           $valid = true;
       }
       
-      if ($_POST["communication"] == "postal" && !empty($_POST["street"]) && !empty($_POST["housenumber"]) && !empty($_POST["postalcode"]) && !empty($_POST["city"]) &&  !empty($_POST["pronouns"]) && !empty($_POST["name"]) && !empty($_POST["message"])) { 
+      if ($communication == "postal" && !empty($_POST["street"]) && !empty($_POST["housenumber"]) && !empty($_POST["postalcode"]) && !empty($_POST["city"]) &&  !empty($_POST["pronouns"]) && !empty($_POST["name"]) && !empty($_POST["message"])) { 
       $valid = true;
       }
     }
@@ -148,12 +148,7 @@ function showFormField($fieldName, $label, $data, $options = NULL) {
       ";
     } else if ($options == 'COMMUNICATION') {
       $communicationmethod = ["email", "phone", "postal"];
-      $communicationError = "";
-      echo "
-      <div>
-        <p>Preferred Communication Method:</p> <span>* $communicationError</span>
-      ";
-  
+      echo "<div><p>Preferred Communication Method:</p>";
       foreach ($communicationmethod as $method) {
       $methodId = lcfirst($method) . "-communication"; // Generate unique ID for each radio button
       echo "
@@ -161,6 +156,7 @@ function showFormField($fieldName, $label, $data, $options = NULL) {
       <input type=\"radio\" id=\"$methodId\" name=\"communication\" value=\"$method\" " . ($data["communication"] == $method ? "checked" : "") . ">
       ";
       }
+    echo "<span>* ". $data[$fieldName . "Error"] ."</span>";
     echo "</div>";
   }
 }

@@ -29,7 +29,7 @@ function showWebshopContent($data) {
     // Display product information
     echo "<a href='index.php?page=Product&id=$id' div class='product'>";
     echo "<div class=''>";
-    echo "<p>Product ID: $id</p>";
+    //echo "<p>Product ID: $id</p>";
     echo "<img src='$image' alt='$name'>";
     echo "<h3>$name</h3>";
     //echo "<p>$description</p>";
@@ -43,6 +43,8 @@ function showWebshopContent($data) {
   echo "</div>";
   } catch (Exception $e) {
       $generalError = "Could not connect to the database, You cannot view the webshop at this time. Please try again later.";
+    } finally {
+      $generalError = "";
     }
   return [ 'generalError' => $generalError ];
 }
