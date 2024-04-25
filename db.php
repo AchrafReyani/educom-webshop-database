@@ -68,9 +68,7 @@ function getAllProducts() {
     $products = array();
     $conn = connectToDB();
     $sql = "SELECT id, name, description, price, image FROM products";
-    
-    $query = mysqli_query($conn, $sql);
-    
+    $query = mysqli_query($conn, $sql); 
     while($row = mysqli_fetch_assoc($query)) {
         $products[$row['id']] = $row;
     }
@@ -78,13 +76,16 @@ function getAllProducts() {
     return $products;
 }
 
-function getProductDetails($conn, $id) {
+function getProductDetails($id) {
+    $conn = connectToDB();
     $idEscape = mysqli_real_escape_string($conn, $id);
-    
     $sql = "SELECT * FROM products WHERE id = $idEscape";
     $query = mysqli_query($conn, $sql);
-    
-    return $query;
+    while($row = mysqli_fetch_assoc($query)) {
+        $products[$row['id']] = $row;
+    }
+    mysqli_close($conn);
+    return $product;
 }
 
 //TODO make function
