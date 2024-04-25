@@ -3,7 +3,6 @@ function showWebshopStart() {
   echo "<h2>Webshop</h2>";
 }
 
-//TODO
 function addToCartButton($id) {
   echo "<form action='index.php' method='POST'>
   <input type='hidden' name='action' value='addToShoppingCart'>

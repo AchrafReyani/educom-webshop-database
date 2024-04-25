@@ -47,7 +47,7 @@ function showContent($data) {
       showProductPage($data);
       break;
     case 'ShoppingCart';
-      include 'shoppingCart.php';
+      //include 'shoppingCart.php';
       showShoppingCartPage($data);
       break;
     default; 
@@ -103,6 +103,9 @@ function handleCartActions() {
       $id = $_POST['id'];
       removeFromShoppingCart($id);
       break;
+    case 'submitShoppingCart'; //place order
+      //TODO
+      break;
   }
 }
 
@@ -120,6 +123,10 @@ function processRequest($page) {
       include 'product.php';
       $data = getWebshopProducts();//get potential error message
       //handleCartActions();
+      break;
+    case 'ShoppingCart';
+      include 'shoppingCart.php';
+      $data = getWebshopProducts();
       break;
 		case 'Contact';
       include 'contact.php';
@@ -143,11 +150,6 @@ function processRequest($page) {
       if ($data['valid']) {
         doLoginUser($data['username'], $data['userid']);
         makeShoppingCart();//make shopping cart session variable when user logs in
-        addToShoppingCart(1);
-        addToShoppingCart(2);
-        addToShoppingCart(3);
-        addToShoppingCart(4);
-        addToShoppingCart(5);
         $page = 'Home';
       }
       break;
