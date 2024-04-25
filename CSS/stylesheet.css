@@ -129,5 +129,11 @@ input, select, textarea {
   padding: 10px;
   border: 1px solid red;
   border-radius: 4px;
-  margin-bottom: 10px; /* Optional: Add some space below the error message */
+  margin-bottom: 10px;
+}
+
+.shoppingCartImage {
+  max-width: 50px;
+  height: auto;
+  object-fit: cover;
 }

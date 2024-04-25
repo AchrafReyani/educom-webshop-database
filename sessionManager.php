@@ -33,4 +33,6 @@ function addToShoppingCart($id) {
         $_SESSION['shoppingCart'][$id]++;
     }
 }
+
+//getshoppingcart/readshoppingcart
 ?>

@@ -13,8 +13,6 @@ session_start(); //start session
 
 //functions
 function showContent($data) {
-
-  //$page = explode('&', $data['page'])[0]; // Get first part before '&'
   $page = $data['page'];
   switch($page)
   {
@@ -43,11 +41,9 @@ function showContent($data) {
       showChangePasswordPage($data);
       break;
     case 'Webshop';
-      //include 'webshop.php';
       showWebshopPage($data);
       break;
     case 'Product';
-      include 'product.php';
       showProductPage($data);
       break;
     case 'ShoppingCart';
@@ -90,13 +86,18 @@ function getWebshopProducts() {
   return ['products' => $products];
 }
 
+//handlecartactions functie maken
 function processRequest($page) {
   switch($page)
 	{
     case 'Webshop';
       include 'webshop.php';
       $data = getWebshopProducts();//get potential error message
-      var_dump($data);
+      //var_dump($data);
+      break;
+    case 'Product';
+      include 'product.php';
+      $data = getWebshopProducts();//get potential error message
       break;
     case 'addToCart';
       $data = addToCartButton();
@@ -124,6 +125,11 @@ function processRequest($page) {
       if ($data['valid']) {
         doLoginUser($data['username'], $data['userid']);
         makeShoppingCart();//make shopping cart session variable when user logs in
+        addToShoppingCart(1);
+        addToShoppingCart(2);
+        addToShoppingCart(3);
+        addToShoppingCart(4);
+        addToShoppingCart(5);
         $page = 'Home';
       }
       break;
