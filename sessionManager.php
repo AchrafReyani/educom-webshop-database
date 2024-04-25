@@ -22,7 +22,7 @@ function makeShoppingCart() {
 }
 
 //gets called either when an order has been made or if the user logs out.
-function removeShoppingCart() {
+function deleteShoppingCart() {
     unset($_SESSION['shoppingCart']);
 }
 
@@ -34,5 +34,14 @@ function addToShoppingCart($id) {
     }
 }
 
-//getshoppingcart/readshoppingcart
+function removeFromShoppingCart($id) {
+    if ($_SESSION['shoppingCart'][$id] > 0) {
+        $_SESSION['shoppingCart'][$id]--;
+    }    
+}
+
+function getShoppingCart() {
+    $shoppingCart = $_SESSION['shoppingCart'];
+    return $shoppingCart;
+}
 ?>

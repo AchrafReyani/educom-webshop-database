@@ -86,6 +86,26 @@ function getWebshopProducts() {
   return ['products' => $products];
 }
 
+//TODO this probably shouldn't be here
+function handleCartActions() {
+  $action = $_POST['action'];
+  echo $action;
+  echo $action;
+  echo $action;
+  echo $action;
+  switch ($action)
+  {
+    case 'addToShoppingCart';
+      $id = $_POST['id'];
+      addToShoppingCart($id);
+      break;
+    case 'removeFromShoppingCart';
+      $id = $_POST['id'];
+      removeFromShoppingCart($id);
+      break;
+  }
+}
+
 //handlecartactions functie maken
 function processRequest($page) {
   switch($page)
@@ -93,15 +113,13 @@ function processRequest($page) {
     case 'Webshop';
       include 'webshop.php';
       $data = getWebshopProducts();//get potential error message
+      handleCartActions();
       //var_dump($data);
       break;
     case 'Product';
       include 'product.php';
       $data = getWebshopProducts();//get potential error message
-      break;
-    case 'addToCart';
-      $data = addToCartButton();
-      $page = 'Webshop';
+      //handleCartActions();
       break;
 		case 'Contact';
       include 'contact.php';
@@ -135,7 +153,7 @@ function processRequest($page) {
       break;
     case 'Logout';
       doLogoutUser();
-      removeShoppingCart();
+      deleteShoppingCart();
       $page = 'Home';
       break;
     case 'ChangePassword';

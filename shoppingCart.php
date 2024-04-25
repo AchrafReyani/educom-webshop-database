@@ -10,21 +10,12 @@ function showShoppingCartContent() {
     echo 'Your shopping cart is empty.';
   } else {
     echo '<ul class="shoppingCart">';
-    foreach ($_SESSION['shoppingCart'] as $id => $quantity) {
-      include_once 'db.php';
-      $productDetails = getProductDetails($id);
-      if ($productDetails) {
-        echo '<li>';
-        echo $productDetails['name'] . ' (Quantity: ' . $quantity . ')';
-        echo $productDetails['image'];
-        echo $productDetails['price'];
-        echo '</li>';
-        } else {
-        echo '<li>Product with ID ' . $id . ' not found.</li>';
-        }
-      }
-      echo '</ul>';
+    $shoppingCart = getShoppingCart();
+    foreach ($shoppingCart as $id => $quantity) {
+      echo '<li>id: '.$id.' quantity: '.$quantity.'</li>';
     }
+    echo '</ul>';
+  }
 }
 
 function showShoppingCartPage() {
