@@ -27,9 +27,9 @@ function showContent($data) {
     case 'Contact';
       showContactPage($data);
       break;
-    case 'Thankyou';
-      include 'thankyou.php';
-      showThankYouPage($data);
+    case 'ThankyouForm';
+      include 'thankyouForm.php';
+      showThankYouFormPage($data);
       break;
     case 'Register';
   	  showRegisterPage($data);
@@ -49,6 +49,10 @@ function showContent($data) {
     case 'ShoppingCart';
       //include 'shoppingCart.php';
       showShoppingCartPage($data);
+      break;
+    case 'ThankyouOrder';
+      include 'thankyouOrder.php';
+      showThankYouOrderPage($data);
       break;
     default; 
       showHomePage();
@@ -88,11 +92,12 @@ function getWebshopProducts() {
 
 //TODO this probably shouldn't be here
 function handleCartActions() {
-  $action = $_POST['action'];
-  echo $action;
-  echo $action;
-  echo $action;
-  echo $action;
+  if (isset($_POST['action'])) {
+    $action = $_POST['action'];
+  } else {
+    // Handle the case where 'action' is not set (optional)
+    $action = "";  // Or set a default value
+  }
   switch ($action)
   {
     case 'addToShoppingCart';
@@ -103,10 +108,13 @@ function handleCartActions() {
       $id = $_POST['id'];
       removeFromShoppingCart($id);
       break;
-    case 'submitShoppingCart'; //place order
-      //TODO
+    case 'submitShoppingCart'; 
+      placeOrder();
+      deleteShoppingCart();//TODO maybe make seperate function for emptying thhe shopping cart and completely unsetting it for logging out
+      makeShoppingCart();
       break;
   }
+  return $action;
 }
 
 //handlecartactions functie maken
@@ -116,7 +124,7 @@ function processRequest($page) {
     case 'Webshop';
       include 'webshop.php';
       $data = getWebshopProducts();//get potential error message
-      handleCartActions();
+      $action = handleCartActions();
       //var_dump($data);
       break;
     case 'Product';
@@ -127,13 +135,17 @@ function processRequest($page) {
     case 'ShoppingCart';
       include 'shoppingCart.php';
       $data = getWebshopProducts();
+      $action = handleCartActions();
+      if ($action == 'submitShoppingCart') {
+        $page = 'ThankyouOrder';
+      }
       break;
 		case 'Contact';
       include 'contact.php';
       $data = validateForm();
       if ($data['valid']) {
         //TODO send email to myself?
-        $page = 'Thankyou';
+        $page = 'ThankyouForm';
       }
       break;
     case 'Register';

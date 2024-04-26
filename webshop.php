@@ -33,11 +33,12 @@ function showWebshopContent($data) {
     echo "<h3>$name</h3>";
     //echo "<p>$description</p>";
     echo "<p class='price'>$$price</p>";
+    if(isUserLoggedIn()) {
+      addToCartButton($id);
+  }
     echo "</div>";
     echo "</a>";
-    if(isUserLoggedIn()) {
-        addToCartButton($id);
-    }
+    
   }
   echo "</div>";
   } catch (Exception $e) {

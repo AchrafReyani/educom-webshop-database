@@ -18,7 +18,14 @@ function getUserInfo($email) {
     mysqli_close($conn);
     return $user;
 }
-  
+
+function getEmailCount($email) {
+    $conn = connectToDB();
+    $query = mysqli_query($conn, "SELECT email from users where email = '$email'"); //Search for the email from the users database 
+    $count = mysqli_num_rows($query); //get the number of rows that contain the email address. 
+    mysqli_close($conn);
+    return $count;
+}
 
 function registerNewUser($email, $name, $password) {
     $conn = connectToDB();
@@ -90,7 +97,24 @@ function getProductDetails($id) {
 
 //TODO make function
 function placeOrder() {
-
+    $conn = connectToDB();
+    try {
+        $shoppingCart = getShoppingCart();
+        if (!empty($shoppingCart)) {
+        $date = date("Y-m-d");
+        $query = "INSERT INTO orders (user_id, date) VALUES (" . getUserId() . ", '$date');";
+        mysqli_query($conn, $query);
+        $query = "INSERT INTO order_rows (order_id, product_id, quantity) VALUES ";
+        $values = [];  // Array to store prepared values
+        foreach ($shoppingCart as $id => $quantity) {
+            $values[] = "('" . mysqli_insert_id($conn) . "','" . $id . "','" . $quantity . "')";
+        }
+        $query .= implode(',', $values);  // Join values using comma
+        mysqli_query($conn, $query);
+        }
+    } catch (Exception $e) {  }
+    finally {
+        mysqli_close($conn);
+    }
 }
-
 ?>

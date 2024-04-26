@@ -13,3 +13,4 @@ function storeUser($email, $name, $password) {
   registerNewUser($email, $name, $hashedPassword);
 }
 ?>
+

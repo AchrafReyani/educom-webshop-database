@@ -6,7 +6,7 @@ function showProductStart() {
 function showProductContent($data) {
   // Get product ID from URL
   $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
-  echo "Product ID: $id";
+  //echo "Product ID: $id";
 
   // Connect to database and get product details
   //require_once 'db.php';
@@ -27,6 +27,10 @@ function showProductContent($data) {
         echo "<h3>$name</h3>";
         echo "<p>$description</p>";
         echo "<p class='price'>$$price</p>";
+        if(isUserLoggedIn()) {
+          include_once 'webshop.php';
+          addToCartButton($id);
+      }
         echo "</div>";
         echo "</div>";
       }

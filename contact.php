@@ -108,7 +108,6 @@ function validateForm() {
       }
     }
 
-  //TODO handle return statement inside index
   return [ 'valid' => $valid, 'pronouns' => $pronouns, 'name' => $name, 'email' => $email, 'phonenumber' => $phonenumber, 'street' => $street, 
              'housenumber' => $housenumber, 'postalcode' => $postalcode, 'city' => $city, 'communication' => $communication, 'message' => $message,
              'pronounsError' => $pronounsError, 'nameError' => $nameError, 'emailError' => $emailError, 'phonenumberError' => $phonenumberError, 'streetError' => $streetError, 'housenumberError' => $housenumberError, 'postalcodeError' => $postalcodeError, 'cityError' => $cityError, 'communicationError' => $communicationError, 'messageError' => $messageError ];

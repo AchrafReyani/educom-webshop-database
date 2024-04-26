@@ -13,6 +13,10 @@ function getUsername() {
     return $_SESSION['username'];
 }
 
+function getUserId() {
+    return $_SESSION['userid'];
+}
+
 function isUserLoggedIn() {
     return isset($_SESSION['username']);
 }
@@ -35,9 +39,11 @@ function addToShoppingCart($id) {
 }
 
 function removeFromShoppingCart($id) {
-    if ($_SESSION['shoppingCart'][$id] > 0) {
+    if ($_SESSION['shoppingCart'][$id] > 1) {
         $_SESSION['shoppingCart'][$id]--;
-    }    
+    } else {
+        unset($_SESSION['shoppingCart'][$id]);
+    } 
 }
 
 function getShoppingCart() {

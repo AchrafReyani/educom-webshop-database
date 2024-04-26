@@ -12,21 +12,12 @@ function validateRegistration() {
     $emailError = "Email is required";
   } else {
     $email = $_POST['email'];
-    //Remove spaces from the content 
-    //$email = trim($email); 
     require_once 'db.php';
-    $conn = connectToDB();
-    $query = mysqli_query($conn, "SELECT email from users where email = '$email'"); //Search for the email from the users database 
-    $count = mysqli_num_rows($query); //get the number of rows that contain the email address. 
-    echo $count;
-    echo $email;
+    $count = getEmailCount($email); //get the number of rows that contain the email address. 
     if ($count > 0) { 
-    //echo "Email already exists"; 
     //Action to take if email exists 
     $emailError = "Email already exists";
     } 
-    //Email does not exist in the DB 
-    //$email = $_POST['email'];
     }
 
     if (empty($_POST["name"])) {
